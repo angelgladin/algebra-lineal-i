@@ -1,0 +1,542 @@
+%%%
+ %
+ % Copyright (C) 2019 Ángel Iván Gladín García
+ %
+ % This program is free software: you can redistribute it and/or modify
+ % it under the terms of the GNU General Public License as published by
+ % the Free Software Foundation, either version 3 of the License, or
+ % (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=.75in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\decimalpoint
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{float}
+
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{commath}
+
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\usepackage{longtable}
+
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usepackage{verbatim}
+
+\usepackage{systeme}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+\usepackage{import}
+
+\usepackage[utf8]{inputenc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Pro}{\mathds{P}}
+\newcommand{\Oh}{\mathcal{O}} %% Notacion "O"
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\ord}{\text{ord}}
+\newcommand{\sol}{\textbf{\underline{Solución}: }} %% Solucion
+\newcommand{\af}{\textbf{\underline{Afirmación}: }}
+\newcommand{\cej}{\textbf{\underline{Contraejemplo}: }}
+
+\newcommand{\verd}{\textbf{\underline{Verdadero} }}
+\newcommand{\fals}{\textbf{\underline{Falso} }}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{
+        Universidad Nacional Autónoma de México\\
+        Facultad de Ciencias\\
+        Álgebra Lineal I\\
+    \vspace{.5cm}
+    \large
+        \textbf{Tarea 1}
+}
+\author{
+    Ángel Iván Gladín García\\
+    No. cuenta: 313112470\\
+    \texttt{angelgladin@ciencias.unam.mx}
+}
+\date{5 de Marzo 2020}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Teorema}
+\newtheorem{example}{Ejemplo}
+\newtheorem{corollary}{Corolario}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definicion}
+\newtheorem{prop}{Proposicion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item ¿Es verdadera o falsa cada una de las siguientes afirmaciones acerca de cualquier espacio vectorial $V$?
+Justifica tu respuesta.
+\begin{enumerate}[label=(\alph*)]
+    \item Si para algún vector $x \in V$ se cumple que $ax = bx$, entonces se tiene que $a = b$.
+    
+    \fals. Tomemos $x \in V$ donde $x = 0$ y $a,b \in F$ arbitrarios donde $a = 1$ y $b = 2$. Se tiene que
+    $0 = 1 \cdot 0 = 2 \cdot 0 = 0$ pero $a \neq b$.
+
+    \item Si para todo escalar $a$ se cumple que $ax = ay$ con $x,y \in V$, entonces $x = y$.
+    
+    \fals. Similar al inciso anterior. Tomando $a \in F$ tal que $a = 0$ y $x,y \in V$ tal que
+    $x \neq y$, siempre se cumple que $ax = ay$ pero se tomaron $x, y$ distintos, por lo tanto
+    es falso.
+\end{enumerate}
+
+\item Sea $V$ un espacio vectorial sobre un campo $K$. Demuestre que:
+\begin{enumerate}[label=(\alph*)]
+    \item El neutro aditivo en $V$ es único.
+    \begin{proof}
+        Supongamos que hay dos vectores $0$ y $0'$. Usando VS3\footnote{Existe un elemento en $V$ denotado como $0$
+        tal que $x+0=0$ para cada $x \in V$.} tenemos entonces que para cualquier vector $x$ se tiene que
+        $x + 0 = x = x + 0'$, pero ahora lo que tenemos que dementrar es que $0 = 0'$.
+        \begin{proof} (La Ley de la cancelación para la suma de vectores)
+
+            Si $x,y$ y $z$ son vectores en un espacio vectorial $V$ tal que $x + z = y + z$, entonces
+            $x = y$.
+            
+            Existe un vector $v \in V$ tal que $z + v= 0$ por VS4\footnote{Para cada elemento $x \in V$ existe
+            un elemento $y$ tal que $x+y=0$.}. Por tanto
+            \begin{align*}
+                x &= x + 0 = x + (z + v) = (x + z) + v\\
+                  &= (y + z) + v = y + (z + v) = y + 0 = y
+            \end{align*}
+        \end{proof}
+        Entonces se puede concluir que $0 = 0'$, i.e., el netro aditivo es único.
+    \end{proof}
+
+    \item Para cada vector $x \in V$ su invierso aditivo es único.
+    \begin{proof}
+        Dado el vector $x \in V$ y sean $y, y' \in V$ tal que satisfacen VS4. Entonces
+        $x + y = 0 = x + y'$, pero por el inciso anterior se demostró  ``La Ley de la cancelación para
+        la suma de vectores'', entonces ``cancelando'' a $x$ se concluye que $y = y'$.
+    \end{proof}
+\end{enumerate}
+
+\item Sean $V$ un espacio vectorial, $x,y \in V$ y $a,b \in K$. Demuestre que
+$(a + b)(x + y) = ax + ay + bx + by$.
+\begin{proof}
+    Usando VS7\footnote{Para cada elemento $a \in F$ y cadapar de elementos $x,y \in V$, 
+    $a(x+y)=ax + ay$.} y VS8\footnote{Para cada par de ementos $a,b \in F$ y cada elemento
+    $x \in V$, $(a+b)x=ax+bx$.} se tiene que,
+    \begin{align*}
+        (a + b)(x + y)
+            &= (a + b)x + (a + b)y && \text{Por VS7}\\
+            &= ax + ay + bx + by && \text{Por VS8}
+    \end{align*}
+\end{proof}
+
+\item Demuestre que el conjunto de las funciones pares en $\R$:
+\[
+    \mathscr{E}(\R, \R) = \{ f: \R \to \R \  \mid \  f(x) = f(-x), \forall x \in \R \}
+\]
+junto con la suma de funciones y el producto por escalar usuales forman un espacio vectorial.
+\begin{proof}
+    Lo primero que se debe verificar es que si $f, g \in \mathscr{E}$ y $t \in \R$ entonces
+    $f+g, cf \in \mathscr{E}$ de modod que la suma y multiplicar por un escalar están bien
+    definidas en $\mathscr{E}$ sobre $\R$. Por tanto si $f,g \in \mathscr{E}$ y $c \in \R$ entonces,
+    \begin{align*}    
+        (f+g)(t)=f(-t)+g(-t)=f(t)+g(t)=(f+g)(t),\\
+        (cf)(-t)=c[f(-t)]=c[f(t)]=(cf)(t)
+    \end{align*}
+    para toda $t \in \R$, llo que implica que $f+g$ y $cf$ son funciones pares en $\mathscr{E}$.
+    Por tanto están bien definidas.
+
+    Para provar que es un espacio vectorial debemos de mostrar que se cumplen VS1 - VS8.
+    \begin{itemize}
+        \item \textbf{VS1}. Si $f,g \in \mathscr{E}$ y para toda $t \in \R$,
+        entonces la suma es conmutativa, teniendo así que,
+        \[ (f+g)(t) = f(t)+g(t)=g(t)+f(t)=(g+f)(t) \]
+        lo que implica que $f+g=g+f$.
+        
+        \item \textbf{VS2} Si $f,g,h \in \mathscr{E}$, entonces la suma es asosiativa, teniendo
+        \begin{align*}
+            [(f+g)+h](t) 
+                &= (f+g)(t) + h(t) = (f(t) + g(t)) + h(t)\\
+                &= f(t) + (g(t) + h(t)) = [f + (g+h)](t)
+        \end{align*}
+        para toda $t \in \R$, teniendo así que $(f+g)+h=f+(h+g)$.
+        
+        \item \textbf{VS3} Sea $0$ la función constante $0: \R \to \R$ tal que $0 \in \mathscr{E}$
+        definida como $0(t)=0$ para toda $t \in \R$. Entonces $0(-t)= 0 = 0(t)$.
+        Sea $f \in \mathscr{E}$ entonces se cumple que,
+        \[ (f+0)(t) = f(t) + 0(t) = f(t) + 0 = f(t) \]
+        Teniendo así qiie $f + 0 = f$.
+
+        \item \textbf{VS4} Sean $f, g \in \mathscr{E}$ donde $g(t)=-f(t)$ para toda $t \in \R$, como
+        $f \in \mathscr{E}$ y $g(-t)=-f(-t)=-f(t)$ y así $f + g = 0$ porque
+        \[ (f+g)(t) = f(t) + g(t) = f(t)-f(t) = 0 = 0t  \]
+
+        \item \textbf{VS5} Sea $f \in \mathscr{E}$, se tiene que $1f = f$ y para toda $t \in \R$, dado que
+        $(1f)(t)= 1[f(t)] = f(t)$.
+        
+        \item \textbf{VS6} Para cada $a,b \in \R$ y $f \in \mathscr{R}$ y para toda $t \in \R$, se tiene,
+        $(ab)f=a(bf)$ porque
+        \[ [(ab)f](t) = (ab)[f(t)] = a[bf(t)] = a[(bf)(t)] \]
+        
+        \item \textbf{VS7} Para cada $a \in \R$ y $f, g \in \mathscr{E}$ y para toda $t \in \R$,
+        se tiene $a(f+g)=af+ag$ porque
+        \begin{align*}
+            [a (f+g)](t) 
+                &= a [(f + g) (t)] = a (f (t) + g (t)) = a[f(t)] + a[g(t)]\\
+                &= (af)(t) + (ag)(t) = (af + ag)(t)
+        \end{align*}
+
+        \item \textbf{VS8} Para cada $a,b \in \R$ y $f \in \mathscr{E}$ y para toda $t \in \R$,
+        se tiene $(a+b)f=af+bf$ porque
+        
+    \end{itemize}
+\end{proof}
+
+¿Qué se puede decir del conjunto de las funciones impares, forman o no un espacio vectorial? Justifique su respuesta.
+
+\verd Sí forman un espacio vectorial, denotando así
+\[
+    \mathscr{E}'(\R, \R) = \{ f: \R \to \R \  \mid \  f(-x) = -f(x), \forall x \in \R \}
+\]
+\begin{proof}
+    Sea $\mathscr{E}' \subset V$ donde $V$ está definido como el espacio vectorial de todos los funciones
+    evaluadas en valores reales en la línea real. Como $V$ es un espacio vectorial basta con probar que
+    $\mathscr{E}'$ es un subespacio de $V$.
+    
+    La función $0$ es impar, $0_V(-x) = -0_V(x)$ para todo $x \in \R$. Ahora sea $c \in \R$ y $f, g
+    \in \mathscr{E}'$ entonces $(cf+g)(-x) = cf(-x) + g(-x) = -cf(x) - g(x) = -(cf+g)(x)$
+    y por tanto $cf + g \in \mathscr{E}'$. Como $\mathscr{E}'$ es
+    un subespacio de sigue que es un espacio vectorial.
+\end{proof}
+
+\item Considere el espacio vectorial $\mathscr{F}(S,\R)$ y $f,g,h \in \mathscr{F}(S,\R)$ definidos como
+$f(s)=2s+1$, $g(s)=1+4s-2s^2$ y $h(t)=5^t+1$.
+\begin{enumerate}[label=(\alph*)]
+    \item Demuestre que las tres funciones son diferentes cuando $S = \R$.
+    \begin{proof}
+        Basta con tomar valores diferentes a los valores de $S$.
+    \end{proof}
+
+    \item Demuestre que $f=g$ y $f+g=h$ cuando $S=\{0,1\}$
+    \begin{proof}
+        \begin{enumerate}
+            \item $f = g$
+
+            Se debe mostrar que $f(t) = g(t)$ para $t \in S$. Esto se cumple porque 
+            $f(0) = 2(0)+1 = 1 = 1 + 4(0) - 2(0)^2 = g(0)$ y
+            $f(1) = 2(1)+1 = 3 = 1 + 4(1) - 2(1)^2 = g(1)$.
+
+            \item $f + g = h$
+
+            Se debe mostrar que $f(t) + g(t) = h(t)$ para $t \in S$. Igual se cumple porque
+            $f(1) + g(1) = 3 + 3 = 6 = 5^{(1)} + 1 = h(1)$ y
+            $f(0) + g(0) = 1 + 1 = 2 = 5^{(0)} + 1 = h(0)$.
+        \end{enumerate}
+    \end{proof}
+\end{enumerate}
+
+\item Demuestre o de un contraejemplo para las siguinetes afirmaciones:
+\begin{enumerate}[label=(\alph*)]
+    \item La intersección de dos subespacioes vectoriales es un subespacio vectorial
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \item La suma de dos subespacios vectoriales forma un subespacio vectorial.
+    
+    TODO
+
+    \item La suma de dos subconjuntos de un espacio vectorial siempre es un subespacio vectorial.
+    
+    TODO
+
+    \item El conjunto $\{f \in \mathscr{E} \ \mid \ f (1) = 1 \}$ es un subespacio vectorial de $\mathscr{E}$.
+    
+    TODO
+
+\end{enumerate}
+
+\item ¿Es posible expresar al vector $(5,1,-5)$ como combinación lineal de elementos en\\
+$S = \{(1, -2, -3), (-2, 3, -4)\}$.
+
+Para ver si es posible expresarlo como combinación lineal de elemntos de $S$ basta
+encontrar un $\alpha, \beta \in \R$ tal que:
+\[ (5,1,-5) = \alpha(1,-2,-2) + \beta(-2,3,4) \]
+Teniendo así que $(5,1,-5) = (\alpha - 2\beta, -2\alpha + 3\beta, -\alpha-4\beta)$.
+
+Resolviendo el siguiente sistema de ecuaciones,
+\[
+\systeme{5=\alpha - 2\beta,
+        1= -2\alpha + 3\beta,
+        $-5$ =-\alpha-4\beta}
+\]
+
+Multiplicando la primera ecuación por dos y sumándola a la segunda se tiene,
+\[
+\systeme{5=\alpha - 2\beta,
+        11= -\beta,
+        5 =-\alpha-4\beta}
+\]
+Multiplinado la primera ecuación por 3 y sumándola a la tercera se tiene,
+\[
+\systeme{5=\alpha - 2\beta,
+        11= -\beta,
+        10 =-10\beta}
+\]
+Pero no hay un valor que pueda tomar $\beta$ para que satisfaga el sistema de ecuaciones,
+por lo tanto el vector $(5,1,-5)$ \textbf{no puede ser expresado} como combinación lineal
+de los elementos de $S$.
+
+\item ¿Es el vector $6x^3 - 3x^2 + x + 2$ una combinación lineal de los vectores
+$x^3 -x^2 +2x + 3$ y $2x^3 -3x+3$. (Recuerde que los polinomios $\mathds{P}[x]$ forman un
+espacio vectorial sobre $\R$ con la suma y producto por un escalar usuales).
+
+Para provar si el primer polinomio se puede expresar como combinación lineal de los otros dos
+debemos de encontrar $\alpha, \beta \in \R$ tal que,
+\[ 6x^3 - 3x^2 + x + 2 = \alpha(^3 -x^2 +2x + 3) + \beta(2x^3 -3x+3) \]
+Teniendo así que,
+\begin{align*}
+    6x^3 - 3x^2 + x + 2
+        &= \alpha x^3 - \alpha x^2 + 2 \alpha x + 3 \alpha + 2 \beta x^3 - 3 \beta x + \beta\\
+        &= (\alpha + 2 \beta)x^3 - \alpha x^2 + (2\alpha - 3 \beta)x + 3 \alpha + \beta
+\end{align*}
+Resolviendo el siguiente sistema de ecuaciones (agrupando con resecto a cada coeficiente del polinomio)
+\[
+    \systeme{6 = \alpha + 2 \beta,
+            $-3$ = -\alpha,
+            1 = 2\alpha - 3\beta,
+            2 = 3\alpha + \beta}
+\]
+Sumando la primera ecuación a la segunda se tiene,
+\[
+    \systeme{6 = \alpha + 2 \beta,
+            3 = 2 \beta,
+            1 = 2\alpha - 3\beta,
+            2 = 3\alpha + \beta}
+\]
+Multiplicando por $(-2)$ la primera ecuación y sumándosela a la tercera se tiene,
+\[
+    \systeme{6 = \alpha + 2 \beta,
+            3 = 2 \beta,
+            $-11$ = -7\beta,
+            2 = 3\alpha + \beta}
+\]
+Multiplicando por $(-3)$ la primera ecuación y sumándosela a la tercera se tiene,
+\[
+    \systeme{6 = \alpha + 2 \beta,
+            3 = 2 \beta,
+            $-11$ = -7\beta,
+            $-16$ = -5 \beta}
+\]
+
+Como no hay un valor $\beta$ que satisfaga la ecuación se concluye que el vector
+$6x^3 - 3x^2 + x + 2$ \textbf{no puede ser expresado como combinación lineal de los vectores}
+$x^3 -x^2 +2x + 3$ y $2x^3 -3x+3$.
+
+
+\item Considera el espacio vectorial de las matrices simétricas de $2 \times 2$.
+Exhiba una base para este espacio vectorial y justifique su respuesta.
+
+Expresando la base canónica se tiene entonces,
+\[
+\begin{bmatrix}
+    1  &  0      \\
+    0  &  0      
+\end{bmatrix}
+, 
+\begin{bmatrix}
+    0  &  1      \\
+    0  &  0      
+\end{bmatrix}
+, 
+\begin{bmatrix}
+    0  &  0      \\
+    1  &  0      
+\end{bmatrix}
+, 
+\begin{bmatrix}
+    0  &  0      \\
+    0  &  1      
+\end{bmatrix} 
+\]
+Sea $
+    \begin{bmatrix}
+    a  &  b      \\
+    c  &  d      
+    \end{bmatrix} \in M_{2 \times 2}$ entonces se puede expresar como,
+    \[
+        \begin{bmatrix}
+            a  &  b      \\
+            c  &  d      
+        \end{bmatrix}
+        =
+        a\begin{bmatrix}
+            1  &  0      \\
+            0  &  0      
+        \end{bmatrix}
+        +
+        b\begin{bmatrix}
+            0  &  1      \\
+            0  &  0      
+        \end{bmatrix}
+        + 
+        c\begin{bmatrix}
+            0  &  0      \\
+            1  &  0      
+        \end{bmatrix}
+        + 
+        d\begin{bmatrix}
+            0  &  0      \\
+            0  &  1      
+        \end{bmatrix} 
+        \]
+
+
+%%%%%%% 10
+\item Sean $V$ un espacio vectorial y $S,T \subset V$ tales que $S \subseteq T$. Si $S$ es
+linealmente independiente ¿es $T$ linealmente independiente?
+
+\fals
+
+Lo que sí se cumple es: \textbf{Si $T$ es linealmente independiente, entonces $S$ el
+linealmente independiente}.
+
+\begin{proof}
+    Sean $S = \{ v_1, v_2, \ldots, v_j \}$ y $T = \{ v_1, v_2, \ldots, v_j, v_{j+1}, \ldots, v_k \}$.
+    Como $T$ es linealmente independiente, entonces $\sum_{i=1}^{k} a_i x_i = 0$, lo que por definición
+    de independia lineal pasa si y sólo si $a_i = 0$ con $1 \leq i \leq k$. Como
+    $a_{j+1} = a_{j+1} = \ldots = a_{k} = 0$, entonces $\sum_{i=j+1}^{k} a_i x_i = 0$,
+    teniendo así que $\sum_{i=1}^{j} a_i x_i = 0$ si y sólo si $a_{1} = a_{2} = \ldots = a_{k} = 0$.
+    Por tanto $S$ es linealmente independiente.
+\end{proof}
+
+%%%%%%% 11
+\item Sean $V$ un espacio vectorial y $S,T \subset V$ tales que $S \subseteq T$. Si $T$
+es linealmente dependiente ¿es $S$ linealmente dependiente?
+
+\fals
+
+Lo que sí se cumple es: \textbf{Si $S$ es linealmente dependiente, entonces $T$ el
+linealmente dependiente}.
+
+\begin{proof}
+    Sean $S = \{ v_1, v_2, \ldots, v_j \}$ y $T = \{ v_1, v_2, \ldots, v_j, v_{j+1}, \ldots, v_k \}$.
+    Como $S$ es linealmente dependiente, entonces por definición se tiene que existe una constante
+    $a_1, a_2, \ldots, a_j$ no todos cero tal que $\sum_{i=1}^{j} a_i v_i = 0$. Entonces tomemos
+    $a_{j+1} = a_{j+1} = \ldots = a_{k} = 0$, se sigue que $\sum_{i=i}^{k} a_i v_i = 0$ y al menos un 
+    $a_i \neq 0$ para $1 \leq i \leq k$. Por tanto $S$ es linealmente dependiente.
+\end{proof}
+
+\item Sean $V$ un espacio vectorial y $x, y \in V$ . Demuestre que el conjunto $\{x, y\}$
+es un conjunto linealmente dependiente si y sólo si uno es múltiplo del otro.
+
+\begin{proof}
+    \hfill
+    \begin{itemize}
+        \item[$\Longrightarrow)$] Como $\{x, y\}$ son linealmente independientes. Entonces
+        $\alpha x + \beta y = 0$ cuando $\alpha, \beta$ no son 0. Supongamos que $\alpha \neq 0$,
+        entonces $x = - \frac{\beta}{\alpha}y$ y por lo tanto $x$ es múltiplo de $y$.
+
+        \item[$\Longleftarrow)$] Como $\{x, y\}$ son múltiplos, i.e., $x = \alpha y$, entonces
+        donde $x = 1x$ y como está siendo multiplicado por 1, entonces puede que $\alpha$ sea
+        o no 0, pero como al menos un coeficiente no es cero, entonces cumple con la definición
+        de ser linealmente dependiente.
+    \end{itemize}
+\end{proof}
+
+
+%%%%%%% 13
+\item Considere espacios vectoriales $V$ y $W$ sobre un campo $K$ y una transformación lineal
+$T : V \to W$ . Demuestre que:
+\begin{enumerate}[label=(\alph*)]
+    \item $T(0_V) = 0_W$.
+    \begin{proof}
+        \[ T(0 \cdot 0_V) = 0 T(0_V) = 0_W \]
+    \end{proof}
+    
+    \item $T$ es una transformación lineal si y sólo si $T (ax + y) = aT (x) + T(y)$ para
+    cualesquiera $x,y \in V$ y $a \in K$.
+    \begin{proof}
+        \hfill
+        \begin{itemize}
+            \item[$\Longrightarrow)$] Como $T$ es lineal y sean $x,y \in V$ y $a \in K$, entonces
+            $T(ax + y) = aT(x) + T(y)$. Por pura definición.
+    
+            \item[$\Longleftarrow)$] Como $T (ax + y) = aT (x) + T(y)$ para
+            cualesquiera $x,y \in V$ y $a \in K$. Entonces,
+
+            \begin{itemize}
+                \item $T(x + y) = T(1x + y) = 1T(x) + T(y) = T(x) + T(y)$.
+                \item $T(cx) = T(cx + 0_V) = cT(x) + T(0_V) = cT(x) + 0_W = cT(x)$.
+            \end{itemize}
+        \end{itemize}
+    \end{proof}
+
+    \item Para cualesquiera $x, y \in V$ se cumple que $T(x-y) = T(x)-T(y)$.
+    \begin{proof}
+        \[ T(x-y) = T(x + (-y)) = T(x) + T(-y) = T(x) - T(y) \]
+    \end{proof}
+    
+    \item $T$ es una transformación lineal si y sólo si
+    $T \left( \sum_{i=1}^{n} a_ix_i \right) = \sum_{i=1}^{n}a_i T(x_i)$, para cualesquiera
+    $x_1, \ldots, x_n \in V$ y $a_1, \ldots \in K$.
+    \begin{proof}q
+        \begin{align*}
+            T \left( \sum_{i=1}^{n} a_ix_i \right)
+                &= T(a_1 x_1) + T \left( \sum_{i=1}^{n-1} a_ix_i \right)\\
+                &= T(a_1 x_1) + T(a_2 x_2) + \ldots + T(a_n x_n)\\
+                &= \sum_{i=1}^{n} T(a_i x_i)\\
+                &= \sum_{i=1}^{n} a_i T(x_i)
+        \end{align*}
+    \end{proof}
+\end{enumerate}
+
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{gato.jpg}
+    \caption{Solo me faltó la 6 :(}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

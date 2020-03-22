@@ -1,0 +1,333 @@
+%%%
+ %
+ % Copyright (C) 2019 Ángel Iván Gladín García
+ %
+ % This program is free software: you can redistribute it and/or modify
+ % it under the terms of the GNU General Public License as published by
+ % the Free Software Foundation, either version 3 of the License, or
+ % (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=.75in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\decimalpoint
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{float}
+
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{commath}
+
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\usepackage{longtable}
+
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usepackage{verbatim}
+
+\usepackage{systeme}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+\usepackage{import}
+
+\usepackage[utf8]{inputenc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Pro}{\mathds{P}}
+\newcommand{\Oh}{\mathcal{O}} %% Notacion "O"
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\ord}{\text{ord}}
+\newcommand{\sol}{\textbf{\underline{Solución}: }} %% Solucion
+\newcommand{\af}{\textbf{\underline{Afirmación}: }}
+\newcommand{\cej}{\textbf{\underline{Contraejemplo}: }}
+
+\newcommand{\verd}{\textbf{\underline{Verdadero} }}
+\newcommand{\fals}{\textbf{\underline{Falso} }}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{
+        Universidad Nacional Autónoma de México\\
+        Facultad de Ciencias\\
+        Álgebra Lineal I\\
+    \vspace{.5cm}
+    \large
+        \textbf{Tarea-Examen 1}
+}
+\author{
+    Ángel Iván Gladín García\\
+    No. cuenta: 313112470\\
+    \texttt{angelgladin@ciencias.unam.mx}
+}
+\date{17 de Marzo 2020}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Teorema}
+\newtheorem{example}{Ejemplo}
+\newtheorem{corollary}{Corolario}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definicion}
+\newtheorem{prop}{Proposicion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+
+\item Para los siguientes ejercicios considere $V$ un espacio vectorial.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Sean $W_1, W_2 \leqslant V$ de dimensiones $m$ y $n$, respectivamente, tales que $m \geq n$.
+    Demuestre que $dim(W_1 \cap W_2) \leq n$ y $dim(W_1 + W_2) \leq m + n$.
+    \begin{proof}
+        Sea $W_1 \cap W_2 \subseteq W_2$ y como $dim(W_2) = n$, entonces se sigue la siguiente desigualdad,
+        \[ dim(W_1 \cap W_2) \leq dim(W_2) \]
+        \[ dim(W_1 \cap W_2) \leq n \]
+        Por tanto $dim(W_1 \cap W_2) \leq n$.
+
+        \begin{theorem}
+            Sean $W_1, W_2 \in V$ entonces,
+            \[ dim(W_1 + W_2) = dim(W_1) + dim(W_2) - dim(W_1 \cap W_2) \]
+        \end{theorem}
+        Usando el teorema previamente enunciado, se sigue que,
+        \begin{align*}
+            dim(W_1 + W_2)
+                &= dim(W_1) + dim(W_2) - dim(W_1 \cap W_2)\\
+                &= n + m - dim(W_1 \cap W_2)
+        \end{align*}
+        Como $dim(W_1 \cap W_2) \leq n \leq m + n$, entonces $dim(W_1 + W_2) \leq m + n$.
+    \end{proof}
+
+    \item Demostrar que si $\{ v_1, v_2, v_3 \}$ es una base de $V$ entonces
+    $\{ v_1 + v_2 + v_3, v_2 + v_3, v_3 \}$ también es una base de $V$.
+    \begin{proof}
+        Sea $x \in V$, tal que $a(v_1 + v_2 + v_3) + b(v_2 + v_3) + cv_3 = x$, entonces
+        \[ av_1 + av_2 + av_3 + bv_2 + bv_3 + cv_3 = x \quad \iff \quad
+            av_1 + (a+b)v_2 + (a+b+c)v_3 = x \]
+        Como $v_1, v_2, v_3$ son linealmente independientes, se tiene que $a=0$,
+        $a+b = 0$ y $a+b+c = 0$. Encontrando $a,b$ y $c$ se tiene que $a=0=b=c$.
+        Lo cual muestra que los vectores $\{ v_1 + v_2 + v_3, v_2 + v_3, v_3 \}$ son 
+        linealmente independientes y pueden representar a cualquier vector $y \in V$ como
+        $y = d(v_1 + v_2 + v_3) + e(v_2 + v_3) + fv_3$.
+    \end{proof}
+\end{enumerate}
+
+\item Sean $V$ un espacio vectorial y $S_1, S_2 \subseteq V$.
+Demuestre que = $\langle S_1 \cup S_2 \rangle = \langle S_1 \rangle + \langle S_2 \rangle$.
+\begin{proof}\hfill
+\begin{enumerate}
+    \item[$\subseteq)$] Sea $v \in \langle S_1 \cup S_2 \rangle$. Entonces $v$ puede ser escrito
+    como una combinación lineal de los vectores en $S_1 \cup S_2$ como
+    $v = \sum_i a_i x_i + \sum_j b_j y_y$, donde $a_i, b_j \in F$ y $x_i \in S_1$ y $y_i \in S_2$.
+    Como $\sum_i a_i x_i \in \langle S_1 \rangle$ y $\sum_j b_i y_i \in \langle S_2 \rangle$,
+    entonces $v \in \langle S_1 \rangle + \langle S_2 \rangle$.
+
+    \item[$\supseteq)$] Sea $v \in \langle S_1 \rangle + \langle S_2 \rangle$, por definición
+    se tiene que $v = \sum_i a_i x_i + \sum_j b_j y_y$ donde $a_i, b_j \in F$ y $x_i \in S_1$
+    y $y_i \in S_2$. Lo cual es una combinación lineal de los vectores de $S_1 \cup S_2$.
+    Por tanto $v \in \langle S_1 \cup S_2 \rangle$.
+    
+\end{enumerate}
+\end{proof}
+
+\item Considere el espacio vectorial $\mathscr{F} (\R, \R)$ con la suma y producto por un escalar
+usuales de funciones. Se definen los subconjuntos $W_1, W_2 \subseteq V$ dados por:
+\[
+    W_1 = \{ f : \R \to \R \ | \ \text{es una función par} \} \quad \text{ y } \quad
+    W_2 = \{ f : \R \to \R \ | \ \text{es una función impar} \}
+\]
+Resuelva los siguientes incisos justificando adecuadamente cada una de sus afirmaciones:
+\begin{enumerate}[label=(\alph*)]
+    \item Demuestre que $W_1$ y $W_2$ son subespacios vectoriales de $\mathscr{F} (\R, \R)$.
+    \begin{proof}\hfill
+    \begin{itemize}
+        \item $W_1$ es un subespacio de $\mathscr{F} (\R, \R)$.
+        
+        Sabemos que un función $f: \R \to \R$ es par si $f(x) = -x$ para todo $x \in R$.
+
+        Definamos la función $0: \R \to \R = 0$ como $0(x) = 0$ para todo $x \in \R$. Como $0 \in W_1$
+        porque $0(x) = 0 = 0(-x)$ para toda $x \in \R$
+
+        Sabemos que para cualquier $a \in \R$ y $f \in \R$ se tiene que,
+        $(a \cdot f)(-x) = a \cdot (f(-x)) = a \cdot (f(x)) = (a \cdot f) (x)$, porque $f$ es par.
+        Teniendo así que $a \cdot f$ es par, lo que significa que $a \cdot f \in W_1$.
+
+        De forma similar sabemos que $f, g \in \R$ se tiene que
+        $(f+g)(-x) = f(-x) + g(-x) = f(x) + g(x) = (f+g)(x)$, como $f, g$ son pares entonces se tiene
+        que $f + g \in W_1$.
+
+        \item $W_2$ es un subespacio de $\mathscr{F} (\R, \R)$.
+        
+        Sabemos que un función $f: \R \to \R$ es impar si $f(-x) = -f(x)$ para todo $x \in R$.
+        
+        Definamos la función $0: \R \to \R = 0$ como $0(x) = 0$ para todo $x \in \R$. Como $0 \in W_2$
+        porque $0(-x) = 0 = -0(x)$ para toda $x \in \R$.
+
+        Sabemos que para cualquier $a \in \R$ y $f \in \R$ se tiene que,
+        $(a \cdot f)(-x) = a \cdot (f(-x)) = a \cdot (-f(x)) = -(a \cdot f) (x)$, porque $f$ es impar.
+        Teniendo así que $a \cdot f$ es impar, lo que significa que $a \cdot f \in W_2$.
+
+        De forma similar sabemos que $f, g \in \R$ se tiene que
+        $(f+g)(-x) = f(-x) + g(-x) = -f(x) - g(x) = -(f(x) + g(x)) = -(f+g)(x)$, como $f, g$ son
+        impares entonces se tiene que $f + g \in W_2$.
+    \end{itemize}
+    \end{proof}
+
+    \item Demuestre que $\mathscr{F}(\R, \R) = W_1 \oplus W_2$.
+    \begin{proof}
+        Lo primero que debemos mostrar es que $W_1 \cap W_2 = \{ 0 \}$, tomemos $f \in W_1 \cap W_2$,
+        entonces para cada $x \in \R$ se tiene que $f(x) = f(-x)$, pero como $f$ es para también tenemos
+        que $f(-x) = -f(x)$ porque $f$ es impar. Lo que juntas significa que $-f(x)=f(x)$ lo cual implica
+        que $f(x) = 0$. Pero si $f(x) = 0$ para toda $x \in \R$, entonces $f$ es la función $0$ mostrando
+        así que $W_1 \cap W_2 = \{ 0 \}$.
+
+        Para mostrar que $W_1 + W_2 = \mathscr{F} (\R, \R)$ se tiene que para cualquier
+        $f \in \mathscr{F} (\R, \R)$ definimos $f_p$ y $f_i$ funciones por
+        \[
+            f_p(x) = \frac{f(x) + f(-x)}{2} \quad \text{ y } \quad
+            f_i(x) = \frac{f(x) - f(-x)}{2}
+        \]
+        Comprobemos que $f_p \in W_1$ es par,
+        \[ f_p(-x) = \frac{f(-x) + f(x)}{2} = \frac{f(x) + f(-x)}{2} = f_p(x)\] 
+        Comprobemos que $f_i \in W_2$ es impar,
+        \[ f_i(-x) = \frac{f(-x) - f(x)}{2} = \frac{-f(x) + f(-x)}{2} = 
+            \frac{f(x) - f(-x)}{2} = -f_i(x)\] 
+        También se tiene que,
+        \[ (f_p + f_i) (x) =
+            \frac{f(-x)+f(x)}{2} + \frac{f(-x) - f(x)}{2} = f(x) \]
+        así $f_p + f_i = f$, lo cual muestra que cada función $f$ puede ser escrita como una suma de
+        una función par $f_p$ y una impar $f_i$, teniendo así que $W_1 + W_2 = \mathscr{F} (\R, \R)$.
+
+        Por tanto $\mathscr{F}(\R, \R) = W_1 \oplus W_2$.
+    \end{proof}
+\end{enumerate}
+
+\item Sean $W_1, W_2$ subespacios de un espacio vectorial $V$ tales que $V = W_1 \oplus W_2$. Sean
+$\beta_1$ y $\beta_2$ bases de $W_1$ y $W_2$, respectivamente. Resuelva los siguientes incisos
+justificando adecuadamente cada una de sus afirmaciones:
+\begin{enumerate}[label=(\alph*)]
+    \item $\beta_1 \cap \beta_2 = \emptyset$
+    \begin{proof}
+        Como $V = W_1 \oplus W_2$, tenemos que $W_1 \cap W_2 = \{ 0 \}$. Sean
+        $\beta_1 = \{ v_1, \ldots, v_m \}$ y $\beta_2 = \{ w_1, \ldots, w_m \}$. Notemos que los
+        vectores de la base $v_1, \ldots, v_m  \in W_1$ y $w_1, \ldots, w_m \in W_2$ son todos no
+        ceros, porque son linealmente independientes. Por tanto $\beta_1 \cap \beta_2 = \emptyset$.
+    \end{proof}
+
+    \item $\beta_1 \cup \beta_2$ es una base de $V$
+    \begin{proof}
+        Consideremos $\beta = \beta_1 \cup \beta_2 = \{ v_1, \ldots, v_m, w_1, \ldots, w_m \}$. Los
+        vectores de $\beta$ son linealmente independientes, ya que si
+        $(a_1v_1 + \cdots + a_nv_m) + (b_1 w_1 + \cdots + b_nw_m) = 0$, entonces el primer vector
+        está en $W_1$ y el segundo en $W_2$ así
+        $a_1v_1 + \cdots + a_nv_m = b_1 w_1 + \cdots + b_nw_m = 0$. Como $\beta_1, \beta_2$ son bases,
+        nos da que $a_1 = \cdots = a_n = 0$ y $b_1 = \cdots = b_n = 0$. Los vectores de $\beta$
+        también generan a $V$ porque $V = W_1 \oplus W_2$ lo que significa que cada vector $v \in V$
+        puede escribirse como $v = x + y$ con $x \in W_1$ y $t \in W_2$. Pero $\beta_1, \beta_2$ son
+        bases para $W_1$ y $W_2$ respectivamente, entonces
+        $v = x + y = a_1v_1 + \cdots + a_nv_m = b_1 w_1 + \cdots + b_nw_m$ para algunos coeficientes
+        $a_i$ y $b_j$. Por tanto $\beta_1 \cup \beta_2$ son una base pasa $V$.
+    \end{proof}
+\end{enumerate}
+
+\item Considere la función $T : \mathds{P}_3(\R) \to \mathds{P}_4(\R)$ dada por
+$T(f(x)) = 5f'(x) - \int_{0}^{x} f(t)dt$. Resuelva los siguientes incisos justificando adecuadamente
+cada una de sus afirmaciones:
+\begin{enumerate}[label=(\alph*)]
+    \item Demuestre que $T$ es una transformación lineal.
+    \begin{proof}
+        Sean $f,g \in \mathds{P}_3(\R)$ y $a \in \R$, entonces,
+        \begin{align*}
+            T((af+g)(x))
+                &= 5(af+g)'(x) - \int_{0}^{x} (af+g)(t)dt\\
+                &= 5(af'(x)+g(x)) - \int_{0}^{x} (af(t) + g(t)) dt\\
+                &= 5(af'(x)+g(x)) - a\int_{0}^{x} f(t) - \int_{0}^{x} g(t) dt\\
+                &= a(5f'(x) - \int_{0}^{x} f(t)dt) + 5g'(x) - \int_{0}^{x} g(t) dt\\
+                &= aT(f(x)) + T(g(x))
+        \end{align*}
+        Por lo tanto $T$ es una transformación lineal.
+    \end{proof}
+
+    \item Calcule $dim (\mathds{P}_3(\R))$ y $dim (\mathds{P}_4(\R))$
+    \begin{proof}
+        Tomemos $\beta = \{ 1, x, x^2, x^3 \}$ y $\gamma = \{ 1, x, x^2, x^3, x^4 \}$ las bases
+        estándares de $\mathds{P}_3(\R)$ y $\mathds{P}_4(\R)$ respectivamente, pero por definición
+        la dimesión de un espacio vectorial es la cardinalidad de sus bases. Por tanto
+        $dim (\mathds{P}_3(\R)) = 4$ y $dim (\mathds{P}_4(\R)) = 5$.
+    \end{proof}
+
+    \item Encuentre los subespacios $N(T)$ y $R(T)$.
+    \begin{proof}
+        Tomemos la base estándar $\beta = \{ 1, x, x^2, x^3 \}$ de $dim (\mathds{P}_3(\R))$ donde
+        \[ R(T) = \langle \{ T(1), T(x), T(x^2), T(x^3) \} \rangle =
+            \langle \{ -x, 5-\frac{x^2}{2}, 10x -\frac{x^3}{3}, 15x^2 - \frac{x^4}{4} \}\rangle \]
+        Como $\{ -x, 5-\frac{x^2}{2}, 10x -\frac{x^3}{3}, 15x^2 - \frac{x^4}{4} \}$ son linealmente
+        independientes, entonces $dim(R(T)) = 4$.
+        
+        Usando el teorema de la dimesión $4 = R(T) + N(T) = 4 + N(T) = 4 + 0$, se concluye que
+        $N(T) = \{ 0 \}$.
+    \end{proof}
+
+    \item Encuentre bases para $N(T)$ y $R(T)$, ¿cuáles son sus dimensiones?
+    \begin{proof}
+        Para $N(T)$ su base es
+        $\beta = \{ T(1), T(x), T(x^2), T(x^3) \} = \{ -x, 5-\frac{x^2}{2}, 10x -\frac{x^3}{3}, 15x^2 - \frac{x^4}{4} \}$
+        y $dim(N(T))= 4$. Por el inciso anterior $N(T) = \{ 0 \}$ y $dim(N(T)) = 0$.
+    \end{proof}
+
+    \item ¿La transformación lineal $T$ es inyectiva?
+    \begin{proof}
+        Sí porque si $T$ es lineal si y sólo si $N(T) = \{ 0 \}$, pero por el inciso $c)$
+        se tiene que $N(T) = \{ 0 \}$.
+    \end{proof}
+\end{enumerate}
+
+\end{enumerate}
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[scale=0.5]{gato.jpg}
+%    \caption{Solo me faltó la 6 :(}
+%\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
