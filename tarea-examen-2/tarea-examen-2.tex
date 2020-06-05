@@ -1,0 +1,345 @@
+%%%
+ %
+ % Copyright (C) 2020 Ángel Iván Gladín García
+ %
+ % This program is free software: you can redistribute it and/or modify
+ % it under the terms of the GNU General Public License as published by
+ % the Free Software Foundation, either version 3 of the License, or
+ % (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper]{article}
+\usepackage[margin=.75in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\decimalpoint
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{float}
+
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{commath}
+
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\usepackage{longtable}
+
+
+\usepackage{import}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Pro}{\mathds{P}}
+\newcommand{\sol}{\textbf{\underline{Solución}: }} %% Solucion
+\newcommand{\af}{\textbf{\underline{Afirmación}: }}
+\newcommand{\cej}{\textbf{\underline{Contraejemplo}: }}
+
+\newcommand{\verd}{\textbf{\underline{Verdadero.} }}
+\newcommand{\fals}{\textbf{\underline{Falso.} }}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nulidad}{nulidad}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{
+        Universidad Nacional Autónoma de México\\
+        Facultad de Ciencias\\
+        Álgebra Lineal I\\
+    \vspace{.5cm}
+    \large
+        \textbf{Tarea-Examen 2}
+}
+\author{
+    Ángel Iván Gladín García\\
+    No. cuenta: 313112470\\
+    \texttt{angelgladin@ciencias.unam.mx}
+}
+\date{4 de Mayo 2020}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Teorema}
+\newtheorem*{theorem*}{Teorema}
+\newtheorem{example}{Ejemplo}
+\newtheorem{corollary}{Corolario}
+\newtheorem*{corollary*}{Corolario}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definicion}
+\newtheorem*{definition*}{Definición}
+\newtheorem{prop}{Proposicion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+
+%%%%%%%% 1
+\item Decir si las siguientes afirmaciones son verdaderas o falsas,
+demostrando/justificando sus afirmaciones. Para lo siguiente, $V$ y $W$ son espacios vectoriales con bases
+ordenadas finitas $\alpha$ y $\beta$, respectivamente, y $T : V \to W$ será lineal. $A$ es una matriz.
+
+\begin{enumerate}[label=(\alph*)]
+    \item $\left([T]^{\beta}_{\alpha} \right)^{-1} = [T^{-1}]^{\beta}_{\alpha}$ 
+    
+    \fals De hecho hay un teorema que dice lo siguiente,
+
+    \begin{theorem*}
+        Sean $V$ y $W$ espacios vectoriales de dimensión finita con bases ordenadas $\beta$ y $\gamma$
+        respectivamente. Sea $T : V \to W$ lineal. Entonces $T$ es invertible si y solo si $[T]_\beta^\gamma$
+        es invertible. Además $[T^{-1}]^\beta_\gamma = \left([T]^\gamma_\beta \right)^{-1}$. 
+    \end{theorem*}
+
+    \item $T$ es invertible si y sólo si $T$ es inyectiva y suprayectiva.
+    
+    \verd\begin{proof}
+        Una función es invertible si y solo si es inyectiva y suprayectiva.
+        Una transformación lineal es una función, y es por eso que es invertible si y solo si es invertible
+        y suprayectiva.
+    \end{proof}
+
+    \item $\left( A^{-1} \right)^{-1} = A$
+    
+    \verd\footnote{Hace falta la observación de que $A$ sea invertible.}
+    \begin{proof}
+        Supongamos que $A$ es una matriz de invertible de $n \times n$. Entonces $A^{-1}B = BA^{-1}$, donde
+        $B = A$. De este modo, por definición de \emph{invertibilidad}, la matriz $B$ es la inversa de
+        $A^{-1}$, es decir, $\left( A^{-1} \right)^{-1} = B = A$.
+    \end{proof}
+
+    \item $A$ es invertible si y sólo si $L_A$ es invertible.
+
+    \verd De hecho sale de un corolario que dice lo siguiente
+    \begin{corollary*}
+    $A$ es invertible si y sólo si $L_A$ es invertible. Además, $(L_A)^{-1} = L_{A^{-1}}$.
+    \begin{proof}
+        Sean $\alpha$ y $\beta$ bases ordenadas de $V$ y $W$ respectivamente, entonces
+        $[L_A]^\beta_\alpha$. También se tiene que 
+        \[
+            [L^{-1}_A]^\alpha_\beta=\left([L_A]^\alpha_\beta\right)^{-1} = A^{-1} = [L_{A^{-1}}]^\alpha_\beta
+        \]
+        y de ahí que $(L_A)^{-1} = L_{A^{-1}}$.
+    \end{proof}
+    \end{corollary*}
+
+    \item $A$ debe ser cuadrada para poder tener una inversa.
+    
+    \verd Se sigue de de la definición,
+
+    \begin{definition*}
+        Sea $A$ una matriz de $n \times n$. Entonces $A$ es invertible si existe una matríz $B$ de
+        $n \times n$ tal que $AB = BA = I$.
+
+        Si $A$ es invertible, entonces la matriz $B$ tal que $AB = BA = I$ es única. La matriz $B$ es llamada
+        la \textbf{inversa} de $A$ y es denotada como $A^{-1}$.
+    \end{definition*}
+\end{enumerate}
+
+%%%%%%%% 2
+\item Sean $A$ y $B$ matrices invertibles de $n \times n$. Demostrar que $AB$ es invertible y que
+$(AB)^{-1} = B^{-1} A^{-1}$.
+\begin{proof}
+Como hay a los más una inversa de $AB$, todo lo que debemos desmotrar es que $B^{-1} A^{-1}$ tiene la
+propiedad requerida de ser inversa de $AB$, nombrémosla,
+$$ (AB)(B^{-1}A^{-1}) = (B^{-1} A^{-1})(AB) = I $$
+Pero esto se sigue por la asociatividad de la multiplicación de matrices y por el hecho de que
+$AA^{-1} = A^{-1}A = I$ y $BB^{-1} = B^{-1}B = I$.
+\end{proof}
+
+\begin{definition*}
+Sean $V$ y $W$ espacios vectoriales. Decimos que $V$ es \textbf{isomorfo} a $W$ si existe una
+transformación lineal $T : V \to W$ tal que es invertible. A dicha transformación lineal se le conoce como
+\textbf{isomorfismo} de $V$ en $W$.
+\end{definition*}
+
+%%%%%%%% 3
+\item Sean $V$ y $W$ espacios vectoriales dimensionalmente finitos y sea $T : V \to W$ un isomorfismo. Sea
+$V_0$ un subespacio de $V$:
+\begin{enumerate}[label=(\alph*)]
+    \item Demuestre que $T(V_0)$ es un subespacio de $W$.
+    \begin{proof}
+    El vector cero está en $T(V_0)$ porque $T(0) = 0$. Ahora tomemos $x, y \in T(V_0)$, entonces $x = T(x')$,
+    $y = T(y')$ para $x', y' \in V_0$, pero notemos que $T(x' + y') = T(x') + T(y') = x + y$. Por tanto,
+    $x + y \in T(V_0)$ ya que $x' + y' \in V_0$. Se sigue los mismo con la multiplicación por escalar, si
+    $c \in F$ y $x \in T(V_0)$, entonces $cx = c(T(x')) = T(cx')$ para algún $x' \in V_0$. Por tanto
+    $cx \in T(v_0)$.
+    \end{proof}
+
+    \item Demuestre que $\dim(V_0)$ = $\dim(T(V_0))$.
+    \begin{proof}
+    Restrinjamos $T$ al subespacio $V_0$. Llamemos a esta restricción $T_{V_0} : V_0 \to T(V_0)$. Entonces
+    por definición $T_{V_0}$ es suprayectiva y también inyectiva, ya que $N(T) = \{ 0 \}$. Entonces
+    $T_{V_0}$ sigue siendo un isomorfismo y por el teorema\footnote{
+        Sean $V$ y $W$ espacios vectoriales dimensionalmente finitos (sobre el mismo campo). Entonces $V$ es
+        isomorfo a $W$ si y solo si $\dim(V) = \dim(W)$.
+    } se sigue que $\dim(V_0)$ = $\dim(T(V_0))$.
+    \end{proof}
+    
+\end{enumerate}
+
+\begin{definition*}
+Sea $\beta$ una base ordenada de un espacio vectorial $n$-dimensional $V$ sobre un campo $F$. La
+\textbf{representación estandar de $V$ respecto a} $\beta$ se define como la función $\phi_\beta : V \to F^n$
+dada por $\phi_\beta(x) = [x]_\beta$, para cada $x \in V$.
+\end{definition*}
+
+%%%%%%%% 4
+\item Demuestre que para cualquier espacio vectorial dimensionalmente finito $V$ con base ordenada $\beta$,
+$\phi_\beta$ es un isomorfismo.
+\begin{proof}
+Para mostrar que $\phi_\beta$ es una isomorfismo debemos demostrar que $\phi_\beta$ es lineal, inyectiva y
+suprayectiva. Supongamos que $\beta = \{ v_1, v_2, \ldots, v_n \}$ se una base ordenada para $V$. Tomemos
+$x, y \in V$ tal que $x = a_1 v_1, a_2 v_2, \ldots, a_n v_n$ y $y = b_1 v_1, b_2 v_2, \ldots, b_n v_n$.
+Consideremos la función $\phi_\beta : V \to V$ definida como
+\[
+    \phi_\beta(x) = \phi_\beta(a_1 v_1, a_2 v_2, \ldots, a_n v_n) = 
+    \begin{bmatrix}
+        a_1\\ 
+        a_2\\ 
+        \vdots\\
+        a_n
+    \end{bmatrix}
+\]
+Entonces $\phi_\beta$ es lineal si $\phi_\beta(cx + y) = c\phi_\beta(x) + \phi_\beta(y)$. Se tiene que,
+\begin{align*}
+    \phi_\beta(cx + y)
+        &= \phi_\beta(c(a_1 v_1 + a_2 v_2 + \ldots + a_n v_n) + (b_1 v_1 + b_2 v_2 + \ldots + b_n v_n))\\
+        &= \phi_\beta(c a_1 v_1 + c a_2 v_2 + \ldots + c a_n v_n + b_1 v_1 + b_2 v_2 + \ldots + b_n v_n)\\
+        &= \phi_\beta((c a_1 + b_1) v_1 + (c a_2 + b_2) v_2 + \ldots + (c a_n + b_n) v_n )\\
+        &= \begin{bmatrix}
+                c a_1 + b_1\\ 
+                c a_1 + b_1\\
+                \vdots\\
+                c a_n + b_n
+            \end{bmatrix}
+        =  \begin{bmatrix}
+                c a_1\\ 
+                c a_2\\
+                \vdots\\
+                c a_n
+            \end{bmatrix}
+            +  \begin{bmatrix}
+                    b_1\\ 
+                    b_2\\
+                    \vdots\\
+                    b_n
+                \end{bmatrix}
+        = c \begin{bmatrix}
+            a_1\\ 
+            a_2\\
+            \vdots\\
+            a_n
+        \end{bmatrix}
+        +  \begin{bmatrix}
+                b_1\\ 
+                b_2\\
+                \vdots\\
+                b_n
+            \end{bmatrix}\\
+        &= c\phi_\beta(x) + \phi_\beta(y)
+\end{align*}
+
+Ahora para probar que $\phi_\beta$ es inyectiva si y solo si $N(\phi_\beta) = 0$. Tomemos
+$x \in N(\phi_\beta)$ tal que $x = \sum_{i=1}^{n} a_i v_i = 0$. Pero se tiene que
+\[
+    \begin{bmatrix}
+        a_1\\ 
+        a_2\\
+        \vdots\\
+        a_n
+    \end{bmatrix}
+    = 0
+\]
+lo cual implica que $a_i = 0$ para $1 \leq i \leq n$. Y así $N(\phi_\beta) = 0$, entonces $\phi_\beta$ 
+es inyectiva. Pero por un teorema\footnote{
+    Sean $V$ y $W$ espacios vectoriales de la misma dimensión (finita), y sea $T : V \to W$ lineal. Entonces
+    los siguientes enunciados son equivalentes.
+    \begin{itemize}
+        \item $T$ es inyectiva.
+        \item $T$ es suprayectiva.
+        \item $\rank(T) = \dim(T)$.
+    \end{itemize}
+} tenemos que $T$ es inyectiva si y solo si $T$ es suprayectiva.
+\end{proof}
+
+%%%%%%%% 5
+\item Sea $T : V \to W$ una transformación lineal de un espacio $n$-dimensional $V$ a un espacio
+$m$-dimensional $W$. Sean $\beta$ y $\gamma$ bases ordenadas de $V$ y $W$, respectivamente. Y sea
+$A = [T]^\gamma_\beta$. Demuestre que:
+
+\begin{enumerate}[label=(\alph*)]
+    \item $\rank(T) = \rank(L_A)$.
+    
+    \begin{proof}
+    Consideremos $\phi_\beta : V \to F^n$ la transformación lineal definida como $\phi_\beta(v) = [v]_\beta$
+    y $\phi_\gamma : V \to F^m$ la transformaciónl lineal definida como $\phi_\gamma(w) = [w]_\gamma$.
+    Estas transformaciones son isomorfismos entre sus respectivos espacios.
+    
+    Por demostrar que $\phi_\beta(N(T)) = N(L_A)$,
+    \begin{itemize}
+        \item[$(\subseteq)$] Sea $x \in \phi_\beta(N(T))$. Como $\phi_\beta$ es isomorfa entre $V$ y $F^n$
+        existe un único $v \in N(T)$ tal que $\phi_\beta(v) = [v]_\beta = x$. Ahora como $v \in N(T)$,
+        $T(v) = 0_W$. Se tiene que
+        $0_{F^m} = [0_W]_\gamma = [T(v)]_\gamma = [T]_\beta^\gamma [v]_\beta = Ax$. Por tanto $x \in N(L_A)$.
+        
+        \item[$(\supseteq)$] Sea $x \in N(L_A)$. Sea $v \in V$ sea el único vector tal que
+        $\phi_\beta(v) = [v]\beta = x$. Entonces se tiene que
+        $0_{F^m} = Ax = [T]_\beta^\gamma [v]_\beta = [T(v)]_\gamma = \phi_\gamma(T(v))$.
+        Como $\phi_\gamma$ es un isomorfismo, $T(v) = 0_W$. Por tanto $v \in N(T)$, lo que implica que
+        $x \in \phi_\beta(N(T))$.
+    \end{itemize}
+    \end{proof}
+    
+    \item $\nulidad(T) = \nulidad(L_A)$.
+    
+    \begin{proof}
+    Usando la demostración de (3.a) se sigue que,
+    $$ \nulidad(T) = \dim(N(T)) = \dim(\phi_\beta(N(T))) = \dim(N(L_A)) = \nulidad(L_A) $$
+    Aplicando el teorema de la dimensión
+    $$ n = \dim(V) = \nulidad(T) + \rank(T) $$
+    $$ n = \dim(F^n) = \nulidad(L_A) + \rank(L_A) $$
+    Por tanto, $\nulidad(T) = \nulidad(L_A)$.
+    \end{proof}
+\end{enumerate}
+
+\end{enumerate}
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[scale=0.4]{1.png}
+%    \caption{Prueba}
+%\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

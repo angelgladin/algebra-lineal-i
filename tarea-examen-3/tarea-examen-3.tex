@@ -1,0 +1,609 @@
+%%%
+ %
+ % Copyright (C) 2020 Ángel Iván Gladín García
+ %
+ % This program is free software: you can redistribute it and/or modify
+ % it under the terms of the GNU General Public License as published by
+ % the Free Software Foundation, either version 3 of the License, or
+ % (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper]{article}
+\usepackage[margin=.75in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\decimalpoint
+
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{dsfont}
+\usepackage{amsmath,amsthm,amssymb}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Po}{\mathds{P}}
+
+\newcommand{\af}{\textbf{\underline{Afirmación}: }}
+\newcommand{\cej}{\textbf{\underline{Contraejemplo}: }}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Span}{span}
+
+\newtheorem*{sol}{Solución}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\title{
+        Universidad Nacional Autónoma de México\\
+        Facultad de Ciencias\\
+        Álgebra Lineal I\\
+    \vspace{.5cm}
+    \large
+        \textbf{Tarea-Examen 3}
+}
+\author{
+    Ángel Iván Gladín García\\
+    No. cuenta: 313112470\\
+    \texttt{angelgladin@ciencias.unam.mx}
+}
+\date{5 de junio de 2020}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+
+%%%%%%%% 1
+\item Considere matrices $A$, $B$ y $C$ de $n \times n$. Demuestre lo siguiente:
+\begin{enumerate}[label=(\alph*)]
+    \item El $\det(A) = \det\left( A^T \right)$
+    \begin{proof}
+    Si $A$ no es invertible, entonces $\rank(a) < n$. Pero $\rank(A^T) = \rank(A)$, y así $A^T$ no es invertible.
+    Por tanto $\det(A^T) = \det(A)$ en este caso.
+
+    Por otro lado, si $A$ es invertible, entonces $A$ es un producto de matrices elementales, digamos
+    $A = E_m \cdots E_2 E_1$. Como $\det(E_i) = \det(E_i^T)$ para cada $i$, se tiene que.
+
+    \begin{align*}
+        \det(A^T)
+            &= \det(E_1^T E_2^T \cdots E_M^T)\\
+            &= \det(E_1^T) \cdot \det(E_2^T) \cdots \det(E_m^T)\\
+            &= \det(E_1) \cdot \det(E_2) \cdots \det(E_m)\\
+            &= \det(E_m) \cdot \det(E_2) \cdot \det(E_1)\\
+            &= \det(E_m \cdots E_2 E_1)\\
+            &= \det(A)
+    \end{align*}
+
+    \end{proof}
+
+    \item Si $C$ se obtuvo de $A$ al cambiar el $i$-ésimo renglón (columna) por lo $j$-ésimo renglón
+    (columna). Muestre que $\det(C) = -\det(A)$.
+    \begin{proof}
+    Sean los renglones de $A$ de la forma $a_1, a_2, \ldots, a_n$ y sea $C$ la matriz obtenida de $A$ de intercambiar
+    los renglones $r$ y $s$, donde $r < s$. Así
+    
+    \[
+        A = 
+        \begin{pmatrix}
+            a_1\\
+            \vdots\\
+            a_r\\
+            \vdots\\
+            a_s\\
+            \vdots\\
+            a_n
+        \end{pmatrix}
+        \quad \text{y} \quad
+        C = 
+        \begin{pmatrix}
+            a_1\\
+            \vdots\\
+            a_s\\
+            \vdots\\
+            a_r\\
+            \vdots\\
+            a_n
+        \end{pmatrix}
+    \]
+    
+    Consideremos la matriz obtenida de $A$ de remplazar los renglones $r$ y $s$ por $a_r + a_s$.
+
+    Se tiene que,
+
+    \begin{align*}
+        0
+        &=
+            \det\begin{pmatrix}
+                a_1\\
+                \vdots\\
+                a_r + a_s\\
+                \vdots\\
+                a_r + a_s\\
+                \vdots\\
+                a_n
+            \end{pmatrix} =
+            \det\begin{pmatrix}
+                a_1\\
+                \vdots\\
+                a_r\\
+                \vdots\\
+                a_r + a_s\\
+                \vdots\\
+                a_n
+            \end{pmatrix} +
+            \det\begin{pmatrix}
+                a_1\\
+                \vdots\\
+                a_s\\
+                \vdots\\
+                a_r + a_s\\
+                \vdots\\
+                a_n
+            \end{pmatrix}\\
+        &=
+            \det\begin{pmatrix}
+                a_1\\
+                \vdots\\
+                a_r\\
+                \vdots\\
+                a_r\\
+                \vdots\\
+                a_n
+            \end{pmatrix} =
+            \det\begin{pmatrix}
+                a_1\\
+                \vdots\\
+                a_r\\
+                \vdots\\
+                a_s\\
+                \vdots\\
+                a_n
+            \end{pmatrix} +
+            \det\begin{pmatrix}
+                a_1\\
+                \vdots\\
+                a_s\\
+                \vdots\\
+                a_r\\
+                \vdots\\
+                a_n
+            \end{pmatrix} +
+            \det\begin{pmatrix}
+                a_1\\
+                \vdots\\
+                a_s\\
+                \vdots\\
+                a_s\\
+                \vdots\\
+                a_n
+            \end{pmatrix}\\
+        &=
+            0 + \det(A) + \det(C) + 0
+    \end{align*}
+    Por tanto $\det(C) = -\det(A)$.
+    \end{proof}
+
+    \item $\det(AB) = \det(A)\det(B)$.
+    \begin{proof}
+    Si $A$ no es invertible, entonces $AB$ no es invertible, entonces se sigue cumpliendo la igualdad
+    $0 = \det(AB) = \det(A)\det(B) = 0$. Supongamos que $A$ es invertible, entonces existen operaciones
+    elementales de renglones $E_k, \ldots, E_1$ tal que $A = E_k \cdots E_1$.
+
+    Entonces,
+    \begin{align*}
+        \det(AB)
+            &= \det(E_k \cdots E_1 B)\\
+            &= \det(E_k) \det(E_{k-1} \cdots E_1  B)\\
+            &= \det(E_k) \cdots \det(E_1)\det(B)\\
+            &= \det(E_k \cdots E_1)\det(B)\\
+            &= \det(A)\det(B)
+    \end{align*}
+    \end{proof}
+
+    \item Sea $C$ una matriz obtenida a partir de $A$ al multiplicar por $c \in F$ un renglón. Muestre que
+    $\det(C) = c \cdot \det(A)$.
+    \begin{proof}
+    TODO\footnote{No me dio tiempo porque tenía otras tareas.}
+    \end{proof}
+\end{enumerate}
+
+%%%%%%%% 2
+\item Demuestre que un sistema de ecuaciones lineales $Ax = b$ tiene solución si y sólo si $b \in R(L_A)$.
+\begin{proof}
+\hfill
+\begin{itemize}
+    \item[$(\Longrightarrow)$] Sea $A = (a_1, a_2, \ldots, a_n)$ una matriz donde $a_i$ es la $i$-ésima columna. Sea
+    $s$ una solución,
+    \[
+        s =
+        \begin{pmatrix}
+            x_1\\
+            x_2\\
+            \vdots\\
+            x_n
+        \end{pmatrix}
+    \]
+    Sea $b = As = A_1s_1 + a_2s_2 + \ldots + a_ns_n$, así $b \in R(L_A)$.
+
+    \item[$(\Longleftarrow)$] Supongamos $b \in R(L_A)$, entonces existe $b = As$, donde $s$ es una solución de
+    $Ax = b$.
+\end{itemize}
+\end{proof}
+
+%%%%%%%% 3
+\item Calcule el rango y la inversa (en caso de que exista) de la siguiente matriz:
+\[
+    A = 
+    \begin{pmatrix}
+    1 & 0  & 1  & 1\\ 
+    1 & 1  & -1 & 2\\ 
+    2 & 0  & 1  & 0\\ 
+    0 & -1 & 1  & -3
+    \end{pmatrix}
+\]
+
+\begin{sol}
+Por medio de operaciones elementales en los renglones veremos si podemos obtener su inversa. Observando que
+el renglón 1, 2 y 4 son combinación lineal del renglón 4. Verficándolo explícitamente,
+
+\[
+    \begin{pmatrix}
+        1 & 0  & 1  & 1\\ 
+        1 & 1  & -1 & 2\\ 
+        2 & 0  & 1  & 0\\ 
+        0 & -1 & 1  & -3
+    \end{pmatrix}
+    \quad\longrightarrow\quad
+    \begin{pmatrix}
+        1 & 0  & 1  & 1\\ 
+        0 & 1  & -2 & 2\\ 
+        2 & 0  & 1  & 0\\
+        0 & -1 & 1  & -3
+    \end{pmatrix}
+    \quad\longrightarrow\quad
+    \begin{pmatrix}
+        1 & 0  & 1  & 1\\ 
+        1 & 1  & -1 & 3\\ 
+        2 & 0  & 1  & 0\\ 
+        0 & -1 & 1  & -3
+    \end{pmatrix}
+    \quad\longrightarrow\quad
+\]
+\[
+    \begin{pmatrix}
+        1 & 0  & 1  & 1\\ 
+        1 & 1  & -1 & 3\\ 
+        0 & -2 & -2 & -6\\ 
+        0 & -1 & 1  & -3
+    \end{pmatrix}
+    \quad\longrightarrow\quad
+    \begin{pmatrix}
+        1 & 0  & 1  & 1\\ 
+        1 & 1  & -1 & 3\\ 
+        0 & -2 & -2 & -6\\ 
+        0 & 0 & 0  & 0
+    \end{pmatrix}
+\]
+Usando el hecho que el rango es igual al número máximo de renglones linealmente independientes, siendo este
+$\rank(A) = 3$. Por tanto, la matriz $A$ no tiene inversa.
+\end{sol}
+
+%%%%%%%% 4
+\item Sea $T : \Po_2(\R) \to \Po_2(\R)$ dada por $T(f(x)) = f(x) + f'(x) + f''(x)$:
+\begin{enumerate}[label=(\alph*)]
+    \item Usando el concepto del rango de una matriz demuestre que la transformación $T$ es invertible.
+    \begin{sol}
+    Tomemos $\beta$ la base estandar ordenada de $\Po_2(\R)$. Teniendo así que:
+    \begin{align*}
+        T(1) &= 1 \cdot 1 + 0 \cdot x + 0 \cdot x^2\\
+        T(x) &= 1 \cdot 1 + 1 \cdot x + 0 \cdot x^2\\
+        T(x^2) &= 2 \cdot 1 + 2 \cdot x + 1 \cdot x^2
+    \end{align*}
+    De ahí que,
+    \[
+        [T]_\beta =
+        \begin{pmatrix}
+            1 & 1 & 2 \\ 
+            0 & 1 & 2 \\ 
+            0 & 0 & 1
+        \end{pmatrix}
+    \]
+    
+    Como las columnas son todos linealmente independientes se sigue que,
+    \[
+        \rank([T]_\beta) = \dim\left(
+            \Span\left(
+                \left\{
+                    \begin{pmatrix}
+                        1\\ 
+                        0\\ 
+                        0
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                        1\\ 
+                        1\\ 
+                        0
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                        2\\ 
+                        2\\ 
+                        1
+                    \end{pmatrix}
+                \right\}
+            \right)
+            \right) = 3
+            \]
+            
+            Lo que implica que $T$ es invertible.
+    \end{sol}
+
+    \item Usando la matriz inversa obtenga la transformación inversa de $T$.
+    \begin{sol}
+    Se tratará por medio de operaciones elementales de renglones transformar $([T]_\beta | I_3)$ en una
+    matriz de la forma $(I_3 | [T]_\beta^{-1})$.
+
+    \[
+        \left(
+        \begin{array}{ccc|ccc}
+            1 & 2 & 2 & 1 & 0 & 0 \\
+            0 & 1 & 2 & 0 & 1 & 0 \\
+            0 & 0 & 1 & 0 & 0 & 1
+        \end{array}
+        \right)
+        \quad\longrightarrow\quad
+        \left(
+        \begin{array}{ccc|ccc}
+            1 & 0 & 0 & 1 & -1 & 0 \\
+            0 & 1 & 0 & 0 & 1 & -2 \\
+            0 & 0 & 1 & 0 & 0 & 1
+        \end{array}
+        \right)
+    \]
+
+    Se sigue que,
+    \[
+        ([T]_\beta)^{-1} =
+        \begin{pmatrix}
+            1 & -1 & 0\\ 
+            0 & 1 & -2\\ 
+            0 & 0 & 1
+        \end{pmatrix}
+    \]
+
+    Además se tiene que,
+    \begin{align*}
+        [T^{-1}(a_0 + a_1x + a_2 x^2)]_\beta
+            &= \begin{pmatrix}
+                    1 & -1 & 0\\ 
+                    0 & 1 & -2\\ 
+                    0 & 0 & 1
+                \end{pmatrix}
+                \begin{pmatrix}
+                    a_0\\ 
+                    a_1\\
+                    a_2
+                \end{pmatrix}\\
+            &= \begin{pmatrix}
+                    a_0 - a_1\\
+                    a_1 - 2a_2\\
+                    a_2
+                \end{pmatrix}
+    \end{align*}
+
+    Por tanto
+    \[
+        T^{-1}(a_0 + a_1x + a_2 x^2) = (a_0 - a_1) + (a_1 - 2a_2)x + a_2 x^2
+    \]
+    \end{sol}
+
+    \item Verifique que la transformación obtenida en el paso anterior es efectivamente la transformación inversa.
+    \begin{sol}
+        Es invertible porque
+        \[
+            [T]_\beta ([T]_\beta)^{-1} = ([T]_\beta)^{-1} [T]_\beta= I_3
+        \]
+    \end{sol}
+\end{enumerate}
+
+%%%%%%%% 5
+\item Para cada uno de los siguientes sistemas de ecuaciones encuentre la base y la dimensión del subespacio
+de soluciones para el sistema homogéneo y luego encuentre todas las soluciones para el sistema de
+ecuaciones no homogéneo:
+\begin{enumerate}[label=(\alph*)]
+    \item
+    \begin{equation*}
+        \begin{split}
+            x_1 + 3x_2 &= 0\\
+            2x_1 + 6x_2 &= 0
+        \end{split} 
+        \qquad\qquad
+        \begin{split}
+            x_1 + 3x_2 &= 5\\
+            2x_1 + 6x_2 &= 10
+        \end{split}
+    \end{equation*}
+    
+    \begin{sol}
+    Consideremos el sistema homogéneo de ecuaciones lineales y sea $A$ su forma de matriz,
+    \[
+        A =
+        \begin{pmatrix}
+            1 & 3\\ 
+            4 & 6
+        \end{pmatrix}
+    \]
+    Se observar fácilmente que sus renglones son linealmente dependiente porque el segundo renglón
+    se puede expresar como combinación lineal del primero,
+    \[
+        \begin{pmatrix}
+            1 & 3\\ 
+            4 & 6
+        \end{pmatrix}
+        \quad\longrightarrow\quad
+        \begin{pmatrix}
+            1 & 3\\ 
+            0 & 0
+        \end{pmatrix}
+    \]
+    Tendiendo así que $\rank(A) = 1$.
+
+    Usando un teorema\footnote{
+        \textbf{Teorema 3.8} \emph{Sea $Ax = 0$ sea un sistema homogéneo de $m$ ecuaciones lineales con $n$ incógnitas
+        sobre un campo $F$. Sea $K$ que denota el conjunto de otdas las soluciones de $Ax = 0$. Entonces $K = N(L_A)$;
+        de ahí que $K$ es el subespacio de $F^n$ de dimensión $n -  \rank(L_A) = n - \rank(A)$.}
+    } podemos concluir que el subespacio de soluciones $K$ su $\dim(K) = 2 - 1 = 1$.
+
+    Consideremos a $
+    \begin{pmatrix}
+        -1\\
+        3
+    \end{pmatrix}$ una solución del sistema de ecuaciones, siendo esta una base para $K$.
+
+    De ahí que $K = \left\{
+        t \cdot
+        \begin{pmatrix}
+            -1\\
+            3
+        \end{pmatrix} \: : \: t \in \R
+    \right\}$ son las soluciones para el sistem a de ecuaciones homogéneo.
+
+    \noindent \rule{\linewidth}{0.2mm}
+
+    Para el sistema no homogéneo, consideromos a $\begin{pmatrix}
+        5\\
+        0
+    \end{pmatrix}$ una solución particular pero por otro teorema\footnote{
+        \textbf{Teorema 3.9} \emph{Sea $K$ el conjunto de soluciones de un sistema de ecuaciones lineales $Ax = b$},
+        y sea $K_H$ una conjunto de solucinoes del sistema homogéneo correspondiente $Ax = 0$. Entonces cualquier
+        solución $s$ a $Ax = b$ es de la forma
+        $$ K = \{ s \} + K_H = \{ s + k \: : \: k \in K_H \}. $$
+    }
+    podemos concluir que el conjunto de soluciones es:
+    \[
+        K = \left\{
+        \begin{pmatrix}
+            5\\
+            0
+        \end{pmatrix} +
+        t \cdot
+        \begin{pmatrix}
+            -1\\
+            3
+        \end{pmatrix}
+        \: : \: t \in \R
+        \right\}
+    \]
+
+    \end{sol}
+
+    \item
+    \begin{equation*}
+        \begin{split}
+            2x_1 + x_2 - x_3 &= 0\\
+            x_1 - x_2 + x_3 &= 0\\
+            x_1 + 2x_2 - 2x_3 &= 0
+        \end{split}
+        \qquad\qquad
+        \begin{split}
+            2x_1 + x_2 - x_3 &= 5\\
+            x_1 - x_2 + x_3 &= 1\\
+            x_1 + 2x_2 - 2x_3 &= 4
+        \end{split}
+    \end{equation*}
+
+    \begin{sol}
+    Consideremos el sistema homogéneo de ecuaciones lineales y sea $A$ su forma de matriz,
+    \[
+        A =
+        \begin{pmatrix}
+            2 & 1  & -1\\
+            1 & -1 & 1\\
+            1 & 2  & -2
+        \end{pmatrix}
+    \]
+    Se observar fácilmente que la segunda columna de la matriz es una combinación lineal de la tercera columna,
+    \[
+        \begin{pmatrix}
+            2 & 1  & -1\\
+            1 & -1 & 1\\
+            1 & 2  & -2
+        \end{pmatrix}
+        \quad\longrightarrow\quad
+        \begin{pmatrix}
+            2 & 1  & 0\\
+            1 & -1 & 0\\
+            1 & 2  & 0
+        \end{pmatrix}
+    \]
+    Tendiendo así que $\rank(A) = 2$.
+
+    Concluyendo así que $\dim(K) = 3 -2 = 1$.
+
+    Consideremos a $
+    \begin{pmatrix}
+        0\\
+        1\\
+        1
+    \end{pmatrix}$ una solución del sistema de ecuaciones, siendo esta una base para $K$.
+
+    De ahí que $K = \left\{
+        t \cdot
+        \begin{pmatrix}
+            0\\
+            1\\
+            1
+        \end{pmatrix} \: : \: t \in \R
+    \right\}$ son las soluciones para el sistem a de ecuaciones homogéneo.
+
+    \noindent \rule{\linewidth}{0.2mm}
+
+    Para el sistema no homogéneo, consideromos a $\begin{pmatrix}
+        2\\
+        1\\
+        0
+    \end{pmatrix}$ una solución particular.
+    
+    Podemos concluir que el conjunto de soluciones es:
+    \[
+        K = \left\{
+        \begin{pmatrix}
+            2\\
+            1\\
+            0
+        \end{pmatrix} +
+        t \cdot
+        \begin{pmatrix}
+            0\\
+            1\\
+            0
+        \end{pmatrix}
+        \: : \: t \in \R
+        \right\}
+    \]
+
+    \end{sol}
+\end{enumerate}
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
