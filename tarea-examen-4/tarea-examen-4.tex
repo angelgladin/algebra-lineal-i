@@ -1,0 +1,455 @@
+%%%%%
+    %
+    % Copyright (C) 2020 Ángel Iván Gladín García
+    %
+    % This program is free software: you can redistribute it and/or modify
+    % it under the terms of the GNU General Public License as published by
+    % the Free Software Foundation, either version 3 of the License, or
+    % (at your option) any later version.
+    %
+    % This program is distributed in the hope that it will be useful,
+    % but WITHOUT ANY WARRANTY; without even the implied warranty of
+    % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    % GNU General Public License for more details.
+    %
+    % You should have received a copy of the GNU General Public License
+    % along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper]{article}
+\usepackage[margin=.75in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{enumitem}
+\usepackage{dsfont}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{hyperref}
+
+\decimalpoint
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Po}{\mathds{P}}
+
+\DeclareMathOperator{\Span}{span}
+
+\newtheorem*{sol}{Solución}
+\newtheorem*{definition}{Definición}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\title{
+        Universidad Nacional Autónoma de México\\
+        Facultad de Ciencias\\
+        Álgebra Lineal I\\
+    \vspace{.5cm}
+    \large
+        \textbf{Tarea-Examen 4}
+}
+\author{
+    Ángel Iván Gladín García\\
+    No. cuenta: 313112470\\
+    \texttt{angelgladin@ciencias.unam.mx}
+}
+\date{18 de junio de 2020}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+
+%%%%%%%% 1
+\item Sea $V$ el espacio vectorial generado por $S = \{\sin(t), \cos(t), 1, t \}$ con el producto interior
+definido por:
+
+\[
+    \langle f(t), g(t) \rangle = \int_0^\pi f(t)g(t) dt
+\]
+    
+Usando el proceso de ortogonalización de Gram-Schmidt\footnote{
+    \textbf{Teorema 6.4.} \emph{Sea $V$ un espacio de producto interno y $S = \{ w_1,w_2,\ldots,w_n \}$ un subconjunto
+    linealmente independiente de $V$. Definimos $S' = \{ v_1,v_2,\ldots,v_n \}$, donde $v_1 = w_1$ y
+    \[
+        v_k = w_k - \sum_{j=1}^{k-1} \frac{\langle w_k, v_j \rangle}{\| v_j \|} v_j \quad \text{para }
+        2 \leq k \leq n
+    \]
+    Entonces $S'$ es un conjunto ortogonal de vectores no ceros tales que $\Span(S') = \Span(S)$.}
+} construya una base ortonormal.
+
+\begin{sol}
+Tomemos la base $\beta = S$. Lo que sea es usar el procesos de ortogonalización de Gram-Schmidt para remplazar a
+$\beta$ por una base ortogonal $\{ v_1, v_2, v_3, v_4 \}$ para $V$, y seguido usar esa base ortogonal para construir la
+base ortonormal.
+
+\begin{itemize}
+    \item Tomemos $v_1 = \sin(t)$. Entonces $\| v_1 \|^2 = \frac{\pi}{2}$,
+    y $\langle \cos(t), v_1 \rangle = \displaystyle\int_0^\pi \cos(t) \sin(t) dt = 0$.
+
+    \item De ahí que,
+    \[
+        v_2 = \cos(t) - \frac{\langle v_1, \cos(t) \rangle}{\| v_1 \|^2}v_1 = \cos(t)
+    \]
+    Entonces $\| v_2 \|^2 = \frac{\pi}{2}$.
+
+    \item Se sigue que,
+    \[
+        v_3 = 1 - \frac{\langle v_1, 1 \rangle}{\| v_1 \|^2}v_1 -
+            \frac{\langle v_2, 1 \rangle}{\| v_1 \|^2}v_1
+        = 1 - \frac{4\sin(t)}{\pi}
+    \]
+    Donde
+    \[
+        \langle v_1, 1 \rangle = \int_0^\pi \sin(t)dt = 2
+        ,\quad
+        \langle v_2, 1 \rangle = \int_0^\pi \cos(t)dt = 0
+    \]
+    Entonces $\| v_3\|^2 = \pi - \frac{8}{\pi}$.
+
+    \item Por consiguiente,
+    \[
+        v_4 = t - \frac{\langle v_1, t \rangle}{\| v_1 \|^2}v_1 -
+            \frac{\langle v_2, t \rangle}{\| v_2 \|^2}v_2 -
+            \frac{\langle v_3, t \rangle}{\| v_3 \|^2}v_3
+        = t + \frac{4\cos(t)}{\pi} - \frac{\pi}{2}
+    \]
+    Donde
+    \[
+        \langle v_1, t \rangle = \int_0^\pi \sin(t)dt = 2
+        ,\quad
+        \langle v_2, t \rangle = \int_0^\pi \cos(t)dt = 0
+        ,\quad
+        \langle v_3, t \rangle = \int_0^\pi \cos(t)dt = 0
+    \]
+    Entonces $\| v_4\|^2 = \frac{\pi^4 - 96}{12\pi}$.
+\end{itemize}
+
+Concluyendo así que $\{ v_1,v_2,v_3,v_4 \}$ es una base ortogonal para $V$.
+
+Para obtener una base ortonormal, normalizamos $v_1, v_2, v_3$ y $v_4$ para obtenerl\footnote{Me apoye con la
+herramienta \url{https://www.wolframalpha.com/} para las operaciones.}
+\[
+    u_1 = \frac{v_1}{\| v_1 \|} = \frac{\sin(t)}{\sqrt{\frac{\pi}{2}}}
+        = \sqrt{\frac{2}{\pi}} \sin(t)
+\]
+
+\[
+    u_2 = \frac{v_2}{\| v_2\|} = \frac{\cos(t)}{\sqrt{\frac{\pi}{2}}}
+    = \sqrt{\frac{2}{\pi}} \cos(t)
+\]
+
+\[
+    u_3 = \frac{v_3}{\| v_3\|} = \frac{1 - \frac{4\sin(t)}{\pi}}{\sqrt{\pi - \frac{8}{\pi}}}
+        = \frac{\pi - 4\sin(t)}{\sqrt{\pi(\pi^2 - 8)}}
+\]
+
+\[
+    u_4 = \frac{v_4}{\| v_4\|} = \frac{t + \frac{4\cos(t)}{\pi} - \frac{\pi}{2}}{\sqrt{\frac{\pi^4 - 96}{12\pi}}}
+        = \sqrt{\frac{3}{\pi(\pi^4 - 96)}} (\pi (2t - \pi) + 8\cos(t))
+\]
+
+Teniendo así $\{u_1, u_2, u_3, u_4 \}$ la base ortonormal deseada para $V$.
+\end{sol}
+
+%%%%%%%% 2
+\item Sea $V$ un espacio con producto interior y sea $T$ un operador lineal sobre $V$. Demuestre que:
+
+\begin{enumerate}[label=(\alph*)]
+    \item $R(T^*)^\bot = N(T)$
+    \begin{proof}\hfill
+    \begin{itemize}
+        \item[$(\subseteq)$] Sea $x \in R(T^*)^\bot$. Para cualquier $y \in V$, se tiene que
+        $0 = \langle x, T^*(y)\rangle = \langle T(x), y \rangle$. Así $T(x) = 0$. Por tanto $x \in N(T)$.
+
+        \item[$(\supseteq)$] Sea $x \in N(T)$. Para cualquier $y \in V$, se tiene que
+        $0 = \langle 0, y \rangle = \langle T(x), y \rangle = \langle x, T^*(y) \rangle$. Por tanto $x \in R(T^*)^\bot$.
+    \end{itemize}
+    \end{proof}
+    
+    \item Si $V$ es dimensionalmente finito, entonces $R(T^*) = N(T)^\bot$.
+    \begin{proof}\hfill
+    \begin{itemize}
+        \item[$(\subseteq)$] Sea $x \in N(T)$, entonces hay un $y \in W$ y $z \in W^\bot$ tales que $x = y+z$.
+        De ahí que $0 = T(x) = y$, entonces $x = x \in W^\bot$. 
+
+        \item[$(\supseteq)$] Sea $x \in W^\bot$, de ahí que $T(x) = 0$, entonces $x \in N(T)$.
+    \end{itemize}
+    \end{proof}
+\end{enumerate}
+
+%%%%%%%% 3
+\item Sea $T : \Po_2(\R) \to \Po_2(\R)$ definida mediante $T(f(x)) = f(x) + xf'(x)$. Encontrar todos los valores
+propios de $T$ y encontrar una base $\beta$ para $\Po_2(\R)$ tal que $[T]_\beta$ sea una matriz diagonal.
+
+\begin{sol}
+Sea $T$ el operador lineal en $\Po_2$ y sea $\beta$ la base ordenada para $\Po_2(\R)$, sea $A = [T]_\beta$. Entonces
+\[
+    A =
+    \begin{pmatrix}
+        1 & 0 & 0\\
+        0 & 2 & 0\\
+        0 & 0 & 3
+    \end{pmatrix}
+\]
+Donde el polinomio característico de $T$ es
+\begin{align*}
+    \det(A - tI_3)
+        &= \det
+            \begin{pmatrix}
+                1-t & 0   & 0\\
+                0   & 2-t & 0\\
+                0   & 0   & 3-t
+            \end{pmatrix}\\
+        &= -t^3 + 6t^2 - 11t + 6\\
+        &= -(t-1)(t-2)(t-3)
+\end{align*}
+Teniendo así que $\lambda$ es un valor propio de $T$ (o $A$) si y solo si $\lambda = 1,2,3$.
+
+Considermeos cada valor propio de forma separado
+
+\begin{itemize}
+    \item Sea $\lambda_1 = 1$ y definamos
+    \[
+        B_1 = A - \lambda_1I_3 = 
+        \begin{pmatrix}
+            0 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 2
+        \end{pmatrix}
+    \]
+    Teniendo que el vector propio de $A$ correpondiente a $\lambda_1 = 1$ es de la forma
+    $
+        \begin{pmatrix}
+            1\\
+            0\\
+            0
+        \end{pmatrix},
+    $
+
+    \item Sea $\lambda_2 = 2$ y definamos
+    \[
+        B_2 = A - \lambda_2I_3 = 
+        \begin{pmatrix}
+            -1 & 0 & 0\\
+            0  & 0 & 0\\
+            0  & 0 & 1
+        \end{pmatrix}
+    \]
+    Teniendo que el vector propio de $A$ correpondiente a $\lambda_2 = 2$ es de la forma
+    $
+        \begin{pmatrix}
+            0\\
+            1\\
+            0
+        \end{pmatrix},
+    $
+
+    \item Sea $\lambda_3 = 3$ y definamos
+    \[
+        B_3 = A - \lambda_3I_3 = 
+        \begin{pmatrix}
+            -2 & 0  & 0\\
+            0  & -1 & 0\\
+            0  & 0  & 0
+        \end{pmatrix}
+    \]
+    Teniendo que el vector propio de $A$ correpondiente a $\lambda_3 = 3$ es de la forma
+    $
+        \begin{pmatrix}
+            0\\
+            0\\
+            1
+        \end{pmatrix},
+    $
+
+\end{itemize}
+
+Observémos que $\beta = \left\{
+    \begin{pmatrix}
+        1\\
+        0\\
+        0
+    \end{pmatrix},
+    \begin{pmatrix}
+        0\\
+        1\\
+        0
+    \end{pmatrix},
+    \begin{pmatrix}
+        0\\
+        0\\
+        1
+    \end{pmatrix}  \right\}$
+es una base de $\Po_2(\R)$ que consiste de vectores propio de $T$. Por tanto $T$ es diagonalizable.
+\end{sol}
+
+\begin{definition}
+    Una matriz escalar es una matriz cuadrada de la forma $\lambda I$ para algún escalar $\lambda$; o sea, una matriz
+    escalar es una matriz diagonal en la cual todos los elementos de la diagonal son iguales.
+\end{definition}
+
+
+%%%%%%%% 4
+\item Considere una matriz $A$ de $n \times n$. Demostrar lo siguiente:
+
+\begin{enumerate}[label=(\alph*)]
+    \item Si $A$ es similar a una matriz escalar $\lambda I$, entonces:
+
+    \[
+        A = \lambda I
+    \]
+    
+    \begin{proof}
+    Sea $A \in M_{n \times n}$ tal que $A = QSQ^{-1}$ para alguna matriz invertible $Q$ y $S$ matriz escalar, donde
+    $S = \lambda I_3$ para algún $\lambda \in F$. Entonces
+    \[
+        A = Q(\lambda I_3) Q^{-1} = \lambda Q Q^{-1} I_3 = \lambda I_3
+    \]
+    \end{proof}
+
+    \item Si $A$ es una matriz diagonalizable que sólo tiene un valor propio entonces es una matriz escalar.
+    
+    \begin{proof}
+    Sea
+    $
+        D = 
+        \begin{pmatrix}
+            a_1    & 0      & \cdots & 0\\
+            0      & a_2    & \cdots & 0\\
+            \vdots & \vdots & \ddots & \vdots\\
+            0      & 0      & \cdots & a_n
+        \end{pmatrix}
+    $
+    una matriz diagonal. El polinomio característico de $D$ es
+    \[
+        \det(D - \lambda I_3) = (a_1 - \lambda)(a_2 - \lambda)\cdots(a_n - \lambda)
+    \]
+    Pero como por hipótesis solo tiene un valor propio, llamémosle $a$ se tiene que
+    \[
+        D = 
+        \begin{pmatrix}
+            a      & 0      & \cdots & 0\\
+            0      & a      & \cdots & 0\\
+            \vdots & \vdots & \ddots & \vdots\\
+            0      & 0      & \cdots & a
+        \end{pmatrix} =
+        a I_3
+    \]
+    Por tanto $D$ es una matriz escalar.
+    \end{proof}
+
+    \item Concluir que la matriz
+    \[
+        \begin{pmatrix}
+        1 & 1\\
+        0 & 1
+        \end{pmatrix}
+    \]
+    no es diagonalizable.
+
+    \begin{sol}
+    Tomando su polinomio característico $(1 - \lambda) (1 - \lambda)$, se sigue que solo tiene un valor propio. Pero si
+    fuera diagonalizable, tendría que ser la matriz escalar, pero cláramente no lo es. Por tanto no es diagonalizable.
+    \end{sol}
+
+    \item Considere la matriz $A$ en $M_{n \times n}(\R)$,
+    \[
+        \begin{pmatrix}
+        7 & -4 & 0\\
+        8 & -5 & 0\\
+        6 & -6 & 3
+        \end{pmatrix}
+    \]
+    justificar si $A$ es diagonalizable o no y, en caso de serlo, encontrar una matriz $Q$, tal que $Q^{-1}AQ$ sea
+    una matriz diagonal.
+
+    \begin{sol}
+
+    Calculando el polinomio característico
+    \[
+        \det(A - \lambda I_3) = 
+        \begin{pmatrix}
+            7-\lambda & -4          & 0\\
+            8         & -5-l\lambda & 0\\
+            6         & -6          & 3-\lambda
+        \end{pmatrix} = -(\lambda -3)^2 (\lambda +1)
+    \]
+    Teniendo que sus vectores propios son $\lambda = -1, 3$.
+
+    Resolviendo el sistema de ecuaciones con cada vector propio de la forma $(A - \lambda I) = 0$ se llega a que los
+    vectores propios de $\lambda = 3$ son
+    $
+        \begin{pmatrix}
+            1\\
+            1\\
+            0
+        \end{pmatrix}
+    $ y 
+    $
+        \begin{pmatrix}
+            0\\
+            0\\
+            1
+        \end{pmatrix}
+    $. De igual manero con el valor propio $\lambda = 1$ se tiene el vector propio
+    $
+    \begin{pmatrix}
+        2\\
+        4\\
+        3
+    \end{pmatrix}
+    $.
+    
+    Obteniendo así, $Q$ y $A'$ tal que $A = QA'Q^{-1}$,
+    \[
+        Q = 
+        \begin{pmatrix}
+        1 & 0 & 2\\
+        1 & 0 & 4\\
+        0 & 1 & 3
+        \end{pmatrix}
+        \qquad
+        A' = 
+        \begin{pmatrix}
+        3 & 0 & 0\\
+        0 & 3 & 0\\
+        0 & 0 & -1
+        \end{pmatrix}
+    \]
+
+    Por tanto $A$ es diagonalizable.
+    \end{sol}
+\end{enumerate}
+
+
+%%%%%%%% 5
+\item Sea $T$ un operador lineal en un espacio vectorial $V$ dimensionalmente finito para el cual los distintos
+valores propios de $T$ son $\lambda_1, \lambda_2, \ldots, \lambda_k$.
+Demostrar que
+\[
+    L(\{ x \in V \: : \: x \text{ es un eigenvector de } T \}) =
+        E_{\lambda_1} \oplus E_{\lambda_2} \oplus \cdots \oplus E_{\lambda_k}
+\]
+
+\begin{proof}
+Tomemos a $T_W$ como una restricción de $T$ en $W$. Considermeos $W_{\lambda_i} = W \cap E_{\lambda_i}$. Para cada
+$w \in W$, notemos que $w$ también está en $V$, así $w$ puede ser expresadodo como combinación lineal de eigenvectores
+de diferentes eigenvectores.
+\[
+    w = a_1 u_1 + a_2 u_2 + \cdots + a_k u_k \quad\text{donde } u_i \in E_{\lambda_i}
+\]
+Así $u_i$ está en $W$ y $E_{\lambda_i}$, que es a su vez, $u_i \in W \cap E_{\lambda_i} = W_{\lambda_i}$. De ahí que
+$W$ es una suma directa de $W_{\lambda_i}$. Teniendo así que
+$W_{\lambda_1} \oplus W_{\lambda_2} \oplus \cdots \oplus W_{\lambda_k}$. Pero para cada $W_{\lambda_i}$ se puede
+encontrar una base $\beta_{\lambda_i}$ para $W_{\lambda_i}$. Entonces $\cup_i \beta_{\lambda_i}$ es una base de
+eigenvectores de $T_W$.
+\end{proof}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
